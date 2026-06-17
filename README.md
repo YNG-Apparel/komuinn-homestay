@@ -2,6 +2,10 @@
 
 A responsive homestay booking website developed using HTML, CSS, and JavaScript.
 
+## Preview
+
+![Komuinn Homepage](Screenshot 1.png)
+
 ## Features
 
 - Responsive design
