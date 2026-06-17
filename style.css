@@ -1,0 +1,979 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* prevents horizontal scroll */
+}
+
+main {
+  margin-top: 60px;
+}
+
+/* ---------------------------------- Navigation ---------------------------------- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* bottom: 0; */
+  height: 60px;
+  background-color: #5e534a;
+  /* add s-index after adding slider to see the difference*/
+  z-index: 100;
+  /* box-shadow: 0px 0px 50px gainsboro; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.title {
+  margin: 0;
+  color: aliceblue;
+  line-height: 1;
+}
+
+nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+a {
+  color: aliceblue;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.booking-button {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.booking {
+  background-color: #f4f2ee;
+  color: #4b4b4b;
+  border: 1px solid black;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 8px;
+  width: 120px;
+}
+
+.booking:hover {
+  background-color: #333;
+  color: #f4f2ee;
+}
+
+/* ---------------------------------- Jumbotron ---------------------------------- */
+#jumbotron {
+  width: 100%;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.jumbotron {
+  padding-top: 25px;
+  text-align: center;
+  background-image: url(assets/cement.jpg);
+
+  /* Ensure some bottom spacing so images don't touch the bottom */
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  min-height: 420px; /* adjust as needed */
+}
+
+/* center the text and image vertically and allow wrapping on small screens */
+.header-flex {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+
+  /* Added: vertically center content and prevent the image from sitting at bottom */
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+/* make the jumbotron image scale correctly and not overflow container */
+.jumbotron-img {
+  display: block;
+  width: 100%;
+  max-width: 500px; /* matches the inline width in HTML */
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.jumbotron-title {
+  color: #4b4b4b;
+  font-size: 30px;
+  padding-bottom: 20px;
+}
+
+.jumbotron-text {
+  color: #4b4b4b;
+  text-align: left;
+  padding-bottom: 20px;
+  border-bottom: 8px solid rgb(54, 54, 54);
+}
+
+/* image sliders */
+.section-container {
+  text-align: center;
+  padding: 10px;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.section-title {
+  font-size: 4vw;
+  margin: 10px 0 0;
+}
+
+.section-subtitle {
+  font-size: 2vw;
+  color: aliceblue;
+  margin: 10px 0 0;
+}
+
+.section-slider {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.image-slider {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 15px;
+
+  /* Added: ensure slider has height on desktop so absolutely positioned slides are visible */
+  min-height: 360px; /* adjust as needed */
+  aspect-ratio: 16/9; /* keeps a consistent shape on wide screens */
+}
+
+/* Make absolutely positioned slides cover the slider container */
+.slide {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  clip-path: circle(0% at 0 50%);
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 15px;
+}
+
+.slide-text {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(220, 220, 220, 0.609);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.slide-text h2 {
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+  width: 150px;
+  height: auto;
+}
+
+.slide-text p {
+  font-size: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation {
+  position: absolute;
+  bottom: 5%; /* gunakan % agar mengikuti tinggi gambar */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 5;
+}
+
+.slider-btn {
+  background-color: rgb(151, 151, 151);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.active {
+  opacity: 1;
+}
+
+.slide.active {
+  clip-path: circle(150% at 0 50%);
+  transition: 2s;
+  transition-property: clip-path;
+}
+
+.slide-btn.active {
+  background-color: rgb(0, 0, 0);
+}
+
+/* wave */
+.wave1 {
+  position: absolute;
+  top: 195px;
+  z-index: 2;
+}
+
+.wave2 {
+  position: absolute;
+  top: 210px;
+  z-index: 3;
+}
+
+.form {
+  padding: 15px;
+  background-color: #e8d8c3;
+  border-radius: 5px;
+}
+
+.booking {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* footer */
+footer {
+  background-color: rgb(120, 108, 92);
+  border-radius: 20px;
+  margin-top: 60px;
+  margin-right: 140px;
+  margin-left: 140px;
+}
+
+.main-footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.left-footer {
+  margin-right: auto;
+  margin-left: 40px;
+}
+
+.right-footer {
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.center-footer {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.info-left {
+  color: antiquewhite;
+  text-align: left;
+  width: 100%;
+}
+
+.info-right {
+  color: antiquewhite;
+  text-align: right;
+  width: 100%;
+}
+
+.info-center {
+  color: antiquewhite;
+  text-align: center;
+  width: 100%;
+  padding-top: 5px;
+  border-top: 1px antiquewhite;
+}
+
+.maps-title {
+  text-align: center;
+}
+
+.maps {
+  justify-content: center;
+  align-items: center;
+}
+
+.article-title {
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+.facility-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.facility-left,
+.facility-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px;
+  background: #f4f2ee;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
+}
+
+.facility-left {
+  flex-direction: row;
+}
+
+.facility-right {
+  flex-direction: row-reverse;
+}
+
+.facility-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 500px;
+  gap: 20px;
+}
+
+.facility-left-img,
+.facility-right-img {
+  height: 300px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.facility-title {
+  font-size: 60px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin: 0;
+}
+
+.facility-description-left,
+.facility-description-right {
+  color: #555;
+  line-height: 1.6;
+  text-align: left;
+  font-size: 18px;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* room */
+.room-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.room {
+  background: #f4f2ee;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.room-container img {
+  height: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* testimonies */
+
+#testimonials {
+  padding: 60px;
+  background: #f4f2ee;
+  text-align: center;
+}
+
+#testimonials .article-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  margin-top: 0;
+  color: #333;
+}
+
+.testimonial-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.testimonial {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 1);
+  flex: 1 1 280px;
+  max-width: 500px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 1);
+}
+
+.testimonial-text {
+  font-family: "Merriweather", serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4a4a4a;
+  margin-bottom: 15px;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.testimonial-author {
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+}
+
+.maps {
+  display: flex;
+  justify-content: center;
+}
+
+.section-container {
+  text-align: center;
+  padding: 10px;
+}
+
+.section-title {
+  font-size: 40px;
+  margin: 50px 0 0;
+}
+
+.section-subtitle {
+  font-size: 15px;
+  color: gray;
+  margin: 10px 0 0;
+}
+
+/* ---------------------------
+   ABOUT US SECTION
+---------------------------- */
+
+.about-section {
+  background: #f7f4ef;
+  padding: 80px 20px;
+}
+
+.about-container {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+  color: #4b4238;
+  font-family: "Lora", serif;
+  line-height: 1.8;
+}
+
+.about-title {
+  font-family: "Playfair Display", serif;
+  font-size: 42px;
+  color: #3b312b;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.divider {
+  width: 80px;
+  height: 3px;
+  background: #7f7368;
+  margin: 20px auto 40px;
+  border-radius: 5px;
+}
+
+.about-text {
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.about-signature {
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  color: #3b312b;
+  margin-top: 20px;
+}
+
+/* Safety: force any remaining absolutely positioned children to stay inside container */
+.slide,
+.image-slider,
+.jumbotron,
+.facility-left,
+.facility-right {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+/* --- Tambahan untuk membuat navigation slider ikut gambar di mobile --- */
+
+/* Small/medium screens: 1024px and below (tablet) */
+@media (max-width: 1024px) {
+  main{  
+    margin-top: 150px;
+  }
+  /* let header grow instead of fixed 60px; center items */
+  .header .title {
+    font-size: 28px;
+  }
+  .header {
+    height: auto;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* stop absolute centering of nav which caused overlap */
+  nav {
+    position: static;
+    transform: none;
+    left: auto;
+    display: flex;
+    gap: 12px;
+    justify-content:space-around;
+    width: 100%;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  nav a {
+    font-size: 20px;
+  }
+
+  .booking-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  /* stack jumbotron content */
+  .header-flex {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+  /* Jumbotron image fix */
+  .jumbotron img {
+    width: 100%; /* fill the available space */
+    height: auto; /* keep proportions */
+    max-width: 600px; /* optional limit for large screens */
+    display: block;
+    margin: 0 auto; /* center the image */
+    border-radius: 10px;
+  }
+  .jumbotron-text {
+    text-align: center;
+    border-bottom: none;
+    padding-bottom: 8px;
+  }
+
+  .image-slider {
+    position: relative;
+    width: 640px;
+    height: 480px;
+    max-width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: 15px;
+  }
+
+  /* Ensure slides scale naturally */
+  .slide {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Make slide images responsive */
+  .slide img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+  }
+
+  /* make facility blocks stack */
+  .facility-container {
+    width: 100%;
+    max-width: 100%;
+  }
+  .facility-description-left,
+  .facility-description-right {
+    text-align: center;
+  }
+  .facility-left,
+  .facility-right {
+    flex-direction: column;
+    padding: 12px;
+    gap: 16px;
+  }
+  .facility-content {
+    text-align: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Footer reduce side margins */
+  footer {
+    margin: 30px 20px;
+  }
+  .left-footer,
+  .right-footer {
+    margin: 10px 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Phone screens: 768px and below */
+@media (max-width: 768px) {
+  main{ 
+    margin-top: 120px; 
+  }
+  /* header stacked, nav and booking centered */
+  .header {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    width: auto;
+  }
+  .header .title {
+    font-size: 24px;
+  }
+
+  nav {
+    width: 100%;
+    justify-content:space-around;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  nav a {
+    padding: 6px 8px;
+    font-size: 18px;
+  }
+  .booking {
+    width: 120px;
+    padding: 8px 12px;
+    font-size: 15px;
+  }
+
+  /* jumbotron stacks nicely */
+  .header-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+  .jumbotron {
+    padding: 18px 8px;
+    width: 100%;
+    max-width: 100%;
+  }
+  .jumbotron img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+
+  /* slider and slides scale */
+  .slide .prev,
+  .slide .next {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .image-slider {
+    position: relative;
+    width: 640px;
+    height: 480px;
+    max-width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: 15px;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ✅ scales image nicely */
+    border-radius: 10px;
+  }
+
+  /* facility cards stack vertically and center text */
+  .article-title {
+    font-size: 62px;
+  }
+  .facility-container {
+    width: 100%;
+    max-width: 100%;
+  }
+  .facility-description-left,
+  .facility-description-right {
+    text-align: center;
+  }
+  .facility-left,
+  .facility-right {
+    flex-direction: column;
+    padding: 14px;
+  }
+  .facility-left-img,
+  .facility-right-img {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+  }
+
+  /* rooms stack */
+  .room-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 6px;
+  }
+  .room-container img {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+  }
+
+  /* testimonials stack */
+  .testimonial-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .testimonial {
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    max-height: 180px;
+  }
+
+  /* footer full width and smaller margins */
+  footer {
+    margin: 18px 12px;
+    padding: 16px;
+    border-radius: 12px;
+    width: auto;
+  }
+  .navigation {
+    bottom: 8px; /* lebih dekat ke gambar saat layar kecil */
+    gap: 6px;
+  }
+
+  .slider-btn {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 430px) {
+  main {
+    margin-top: 135px; 
+  }
+  .header .title {
+    font-size:22px;
+  }
+  nav a{  
+    font-size: 16px;
+  }
+  .jumbotron-title {
+    font-size: 22px;
+    margin: 0;
+  }
+  .jumbotron-text {
+    font-size: 16px;
+  }
+  .article-title {
+    font-size: 36px;
+  }
+  .facility-title {
+    font-size: 22px;
+  }
+  .facility-description-left,
+  .facility-description-right {
+    font-size: 16px;
+  }
+  .booking {
+    width: 90%;
+    max-width: 220px;
+  }
+  .image-slider {
+    margin: 16px auto;
+  }
+  main {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .navigation {
+    top: auto; /* hapus bottom */
+    bottom: unset; /* hapus bottom lama */
+    margin-top: -30px; /* naik ke atas gambar, sesuaikan px */
+  }
+
+  .slider-btn {
+    width: 8px;
+    height: 8px;
+  }
+  .testimonial {
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    max-height: 200px;
+  }
+  .testimonial-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 330px) {
+  .testimonial {
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    max-height: 250px;
+  }
+}
+
+/* Slider: smaller + more aesthetic overrides (placed at end so it overrides previous rules) */
+.image-slider {
+  max-width: 520px; /* smaller than before */
+  min-height: 300px;
+  aspect-ratio: 16/10;
+  margin: 20px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(180deg, #f7f5f2 0%, #ededeb 100%);
+}
+
+/* make slides use smooth fade + subtle scale instead of heavy clip-path */
+.image-slider .slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.2, 1),
+    transform 0.6s cubic-bezier(0.2, 0.9, 0.2, 1);
+  clip-path: none; /* remove previous circle animation */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-slider .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+/* active slide */
+.image-slider .slide.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+
+/* nicer navigation dots */
+.navigation {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 6;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* prevent accidental clicks outside dots */
+}
+.navigation .slider-btn {
+  pointer-events: auto;
+  background-color: #cfcfcf;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 160ms ease, background-color 160ms ease;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+.navigation .slider-btn:hover {
+  transform: scale(1.2);
+  background-color: #9e9e9e;
+}
+.navigation .slider-btn.active {
+  background-color: #222;
+  width: 14px;
+  height: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
